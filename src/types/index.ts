@@ -1,9 +1,12 @@
 export interface Blog {
-  id: string;
+  id: number;
+  slug:string;
   title: string;
-  description: string;
-  publish_date: string;
-  author_name: string;
-  blog_image: string;
-  total_likes: string;
+  content:string;
+  // description: string;
+  createdAt: string;
+  author: string;
+  tags: string;
+  // blog_image: string;
+  views: string;
 }

@@ -1,4 +1,6 @@
 import AboutPage from "./about/page";
+import BlogsPage from "./blogs/page";
+import BlogPage from "./blogs/page";
 import ProjectsPage from "./projects/page";
 import ServicesPage from "./services/page";
 import SupportPage from "./support/page";
@@ -27,6 +29,12 @@ export default function Home() {
         className="min-h-screen pt-5 bg-gray-700 text-white"
       >
         <SupportPage></SupportPage>
+      </section>
+      <section
+        id="blogs"
+        className="min-h-screen pt-5 bg-gray-700 text-white"
+      >
+       <BlogsPage></BlogsPage>
       </section>
 
     </div>
