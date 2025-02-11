@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css"
 import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/shared/Footer";
 
 export const metadata: Metadata = {
   title: "my-port-folio",
@@ -17,7 +18,8 @@ export default function RootLayout({
     <html lang="en">
       <body >
         <Navbar></Navbar>
-      <div className="min-h-screen">  {children}</div>
+      <div className="min-h-screen pt-16">  {children}</div>
+      <Footer></Footer>
       </body>
     </html>
   );

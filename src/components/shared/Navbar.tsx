@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-// import brandLogo from "@/assets/logo.png";
-// import Image from "next/image";
+import Social from "../ui/Social";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -12,16 +11,18 @@ const Navbar = () => {
     { href: "/", label: "Home" },
     { href: "/blogs", label: "Blogs" },
     { href: "/about", label: "About Us" },
+    {href: "/services", label: "Services"},
+    {href: "/projects", label: "Projects"},
     { href: "/support", label: "Support" },
   ];
 
   return (
-    <nav className="flex items-center justify-between p-4 border-b container mx-auto">
+    <nav className="flex  justify-between bg-blue-100 p-4 w-full  fixed">
       <div className="flex items-center">
         <div className="flex items-center space-x-2">
           <Link href="/" className="flex items-center gap-1">
             {/* <Image src={brandLogo} width={30} height={30} alt="brand logo" /> */}
-            <span className="text-xl text-red-700 font-bold">NexaBlog</span>
+            <span className="text-xl  font-bold">AnciShan</span>
           </Link>
         </div>
       </div>
@@ -42,14 +43,17 @@ const Navbar = () => {
         ))}
       </div>
 
-      <div>
+      {/* <div>
         <Link
           href="/blogs/create"
           className="px-4 py-3 bg-teal-600 text-white rounded-full hover:bg-teal-500"
         >
           Post Blog
         </Link>
-      </div>
+      </div> */}
+    <div>
+      <Social></Social>
+    </div>
     </nav>
   );
 };
