@@ -5,10 +5,10 @@ const Social = () => {
   return (
     <div>
       <div className="flex justify-between gap-3">
-        <a href="my fb link">
+        <a className=" text-blue-300" href="my fb link">
           <FaFacebookF />
         </a>
-        <a href="my github link">
+        <a className=" text-blue-300" href="my github link">
           <FaLinkedinIn />
         </a>
       </div>
