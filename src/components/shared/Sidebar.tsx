@@ -1,6 +1,8 @@
 "use client";
+import { jwtDecode } from "jwt-decode";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { FaUser, FaCog, FaHome } from "react-icons/fa";
 
 type UserProps = {
@@ -12,6 +14,31 @@ type UserProps = {
 };
 
 const Sidebar = ({ session }: { session: UserProps | null }) => {
+  const [user, setUser] = useState<{
+    name: string;
+    email: string;
+    image: string;
+    password: string;
+  } | null>(null); // Initialize state correctly
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+
+    if (token) {
+      try {
+        const decoded: any = jwtDecode(token);
+        setUser({
+          name: decoded.name,
+          email: decoded.email,
+          image: decoded.image,
+          password: decoded.password,
+        });
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    }
+  }, []);
+
   return (
     <div className="bg-slate-100 min-h-screen p-4 rounded-xl">
       <ul className="space-y-4">
@@ -24,7 +51,7 @@ const Sidebar = ({ session }: { session: UserProps | null }) => {
             <span>Dashboard</span>
           </Link>
         </li>
-        {session?.user && ( // Show these only if user is logged in
+        {session?.user && (
           <>
             <li>
               <Link
@@ -44,12 +71,16 @@ const Sidebar = ({ session }: { session: UserProps | null }) => {
                 <span>Settings</span>
               </Link>
             </li>
+            <li>
+            <Link href="/blogs/create">Create Blog </Link>
+            </li>
           </>
         )}
       </ul>
 
+
       <div className="flex items-center mt-4">
-        {session?.user ? (
+        {session || user ? (
           <button
             onClick={() => signOut()}
             className="border border-red-500 text-red-500 px-5 py-2 rounded-full hover:bg-red-500 hover:text-black transition duration-200"

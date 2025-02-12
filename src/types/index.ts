@@ -2,11 +2,11 @@ export interface Blog {
   id: number;
   slug:string;
   title: string;
-  content:string;
+  description:string;
   // description: string;
   createdAt: string;
-  author: string;
-  tags: string;
-  // blog_image: string;
-  views: string;
+  author_name: string;
+  total_likes: string;
+  blog_image: string;
+  publish_date: string;
 }

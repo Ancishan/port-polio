@@ -65,7 +65,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="flex justify-between bg-gradient-to-r from-slate-600 bg-opacity-100 p-4 w-full fixed top-0 z-50">
+    <nav className="flex justify-between bg-slate-500 bg-opacity-100 p-4 w-full fixed top-0 z-50">
       <div className="flex items-center">
         <div className="flex items-center space-x-2">
           <Link href="/" className="flex items-center gap-1">

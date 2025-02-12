@@ -19,7 +19,7 @@ const Support = () => {
   };
 
   return (
-    <section id="support" className="bg-black py-12 px-6 md:px-12 lg:px-20">
+    <section id="support" className="bg-gray-900 py-12 px-6 md:px-12 lg:px-20">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-3xl font-bold text-teal-500">Get in Touch</h2>
         <p className="text-teal-700 text-xl  mt-3">
