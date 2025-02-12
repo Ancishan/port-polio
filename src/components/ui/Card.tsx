@@ -13,7 +13,7 @@ const Card: React.FC<CardProps> = ({ title, description, technologies, liveLink,
   return (
     <div className="relative overflow-hidden rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
       {typeof image === "string" ? (
-        <img src={image} alt={title} className="w-full h-40 object-cover" />
+        <Image src={image}  alt={title} className="w-full h-40 object-cover" />
       ) : (
         <Image src={image} alt={title} width={500} height={300} className="w-full h-40 object-cover" />
       )}

@@ -16,7 +16,7 @@ const Banner = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          Hi, I'm <span className="text-blue-500">Shanto</span>
+          Hi, I am <span className="text-blue-500">Shanto</span>
         </motion.h1>
         <motion.p
           className="text-lg md:text-xl text-gray-300 mb-6"

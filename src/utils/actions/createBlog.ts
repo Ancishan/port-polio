@@ -3,7 +3,7 @@
 export const createBlog = async (data: FormData) => {
   const blogData = Object.fromEntries(data.entries());
 
-  const res = await fetch("http://localhost:5000/api/v1/blogs", {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}blogs`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

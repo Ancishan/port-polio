@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { userLogin } from "@/utils/actions/loginUser";
 import { signIn } from "next-auth/react";
@@ -16,6 +17,7 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     formState: { errors },
   } = useForm<FormValues>();
   const router = useRouter()

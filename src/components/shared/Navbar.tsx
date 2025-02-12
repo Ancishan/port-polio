@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react"; // Import useMemo
 import Social from "../ui/Social";
 import { useRouter } from "next/navigation";
 
@@ -9,18 +9,22 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
   const router = useRouter(); // Use Next.js router for Dashboard navigation
 
-  const navLinks = [
-    { href: "#home", label: "Home", isExternal: false },
-    { href: "#blogs", label: "Blogs", isExternal: false },
-    { href: "#about", label: "About Us", isExternal: false },
-    { href: "#services", label: "Services", isExternal: false },
-    { href: "#projects", label: "Projects", isExternal: false },
-    { href: "#support", label: "Support", isExternal: false },
-    { href: "/dashboard", label: "Dashboard", isExternal: true }, // External navigation
-  ];
+  // Wrap navLinks in useMemo to prevent unnecessary re-renders
+  const navLinks = useMemo(
+    () => [
+      { href: "#home", label: "Home", isExternal: false },
+      { href: "#blogs", label: "Blogs", isExternal: false },
+      { href: "#about", label: "About Us", isExternal: false },
+      { href: "#services", label: "Services", isExternal: false },
+      { href: "#projects", label: "Projects", isExternal: false },
+      { href: "#support", label: "Support", isExternal: false },
+      { href: "/dashboard", label: "Dashboard", isExternal: true }, // External navigation
+    ],
+    [] // Empty dependency array means navLinks won't change unless we explicitly modify it
+  );
 
   // Function to handle scrolling for internal links
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const sections = navLinks
       .filter(link => !link.isExternal) // Only check internal sections
       .map(link => document.querySelector(link.href));
@@ -40,7 +44,7 @@ const Navbar = () => {
         }
       }
     });
-  };
+  }, [navLinks]); // Memoized navLinks as a dependency
 
   // Handle clicking on a nav link
   const handleClick = (href: string, isExternal: boolean) => {
@@ -62,7 +66,7 @@ const Navbar = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [handleScroll]); // Use handleScroll as a dependency
 
   return (
     <nav className="flex justify-between bg-slate-500 bg-opacity-100 p-4 w-full fixed top-0 z-50">

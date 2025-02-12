@@ -26,6 +26,7 @@ const Sidebar = ({ session }: { session: UserProps | null }) => {
 
     if (token) {
       try {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const decoded: any = jwtDecode(token);
         setUser({
           name: decoded.name,

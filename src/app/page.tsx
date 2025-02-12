@@ -1,6 +1,5 @@
 import AboutPage from "./about/page";
 import BlogsPage from "./blogs/page";
-import BlogPage from "./blogs/page";
 import ProjectsPage from "./projects/page";
 import ServicesPage from "./services/page";
 import SupportPage from "./support/page";
