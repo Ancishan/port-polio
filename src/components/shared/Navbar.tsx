@@ -3,26 +3,32 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Social from "../ui/Social";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
+  const router = useRouter(); // Use Next.js router for Dashboard navigation
 
   const navLinks = [
-    { href: "#home", label: "Home" },
-    { href: "#blogs", label: "Blogs" },
-    { href: "#about", label: "About Us" },
-    { href: "#services", label: "Services" },
-    { href: "#projects", label: "Projects" },
-    { href: "#support", label: "Support" },
+    { href: "#home", label: "Home", isExternal: false },
+    { href: "#blogs", label: "Blogs", isExternal: false },
+    { href: "#about", label: "About Us", isExternal: false },
+    { href: "#services", label: "Services", isExternal: false },
+    { href: "#projects", label: "Projects", isExternal: false },
+    { href: "#support", label: "Support", isExternal: false },
+    { href: "/dashboard", label: "Dashboard", isExternal: true }, // External navigation
   ];
 
-  // Function to handle the scroll event and detect the active section
+  // Function to handle scrolling for internal links
   const handleScroll = () => {
-    const sections = navLinks.map(link => document.querySelector(link.href));
+    const sections = navLinks
+      .filter(link => !link.isExternal) // Only check internal sections
+      .map(link => document.querySelector(link.href));
+
     const scrollPosition = window.scrollY;
 
     sections.forEach((section) => {
-      if (section && section instanceof HTMLElement) { // Casting to HTMLElement
+      if (section && section instanceof HTMLElement) {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
 
@@ -37,17 +43,25 @@ const Navbar = () => {
   };
 
   // Handle clicking on a nav link
-  const handleClick = (sectionId : string) => {
-    setActiveSection(sectionId);
+  const handleClick = (href: string, isExternal: boolean) => {
+    if (isExternal) {
+      router.push(href); // Navigate only for external links like "Dashboard"
+    } else {
+      setActiveSection(href.slice(1)); // Update active section for internal links
+      const section = document.querySelector(href);
+      if (section) {
+        window.scrollTo({
+          top: (section as HTMLElement).offsetTop - 50, // Adjust for fixed navbar
+          behavior: "smooth",
+        });
+      }
+    }
   };
 
-  // Use effect to add scroll event listener
+  // UseEffect to track scrolling
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -61,19 +75,18 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center space-x-6">
-        {navLinks.map(({ href, label }) => (
-          <Link
+        {navLinks.map(({ href, label, isExternal }) => (
+          <button
             key={href}
-            href={href}
-            onClick={() => handleClick(href.slice(1))}  // Update active section on click
+            onClick={() => handleClick(href, isExternal)} // Handle click for internal & external links
             className={`${
-              activeSection === href.slice(1) // Remove '#' and compare
+              activeSection === href.slice(1) && !isExternal
                 ? "text-teal-600 font-bold"
                 : "text-blue-300 hover:text-teal-700"
             } transition-colors duration-300`}
           >
             {label}
-          </Link>
+          </button>
         ))}
       </div>
 
